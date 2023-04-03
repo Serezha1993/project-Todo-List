@@ -1,25 +1,26 @@
 console.log('Hello My TodoList');
 
-const list = JSON.parse(localStorage.getItem('list'));
-[
+
+const defaultlist = [
   {
-    id: 'id1',
+    id: 1,
     title: 'Learn JS',
     done: true,
   },
   {
-    id: 'id2',
+    id: 2,
     title: 'Learn React',
     done: false,
   },
   {
-    id: 'id3',
+    id: 3,
     title: 'TypeScript',
     done: false,
   },
 ];
 
 
+const list = !!localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : defaultlist;
 
 const listElement = document.getElementById("list");
 const todoInput = document.getElementById('todoInput');
@@ -61,13 +62,12 @@ listElement.addEventListener('click', (event) => {
 })
 
 
-
 // Добавляем елемент в список
 function addToList() {
   const todoInputValue = todoInput.value;
 
   list.push({
-    id: Math.random().toString(),
+    id: list.length + 1,
     title: todoInputValue,
     done: false
   });
